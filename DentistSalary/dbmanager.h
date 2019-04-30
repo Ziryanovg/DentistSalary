@@ -32,6 +32,8 @@ public slots:
 
     void setXRayCost(QString XRayCost);
 
+    void saveCfg();
+
 private:
     QSqlDatabase db;
     QString m_AdultPercent;

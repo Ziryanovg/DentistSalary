@@ -70,6 +70,19 @@ void DBManager::setXRayCost(QString XRayCost)
     emit XRayCostChanged(m_XRayCost);
 }
 
+void DBManager::saveCfg()
+{
+    db.open();
+
+    QSqlQuery query;
+
+    query.exec("UPDATE config SET value ='" + m_AdultPercent +"' WHERE name = 'AdultPercent'");
+    query.exec("UPDATE config SET value ='" + m_ChildPercent +"' WHERE name = 'ChildPercent'");
+    query.exec("UPDATE config SET value ='" + m_XRayCost +"' WHERE name = 'XRayCost'");
+
+    db.close();
+}
+
 void DBManager::LoadCfg()
 {
     if(!db.open())
@@ -96,4 +109,3 @@ void DBManager::LoadCfg()
 
     db.close();
 }
-

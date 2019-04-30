@@ -40,6 +40,7 @@ Window {
 
         Text {
             id: label
+            text: "Главная"
             font.pointSize: 20
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
@@ -106,6 +107,7 @@ Window {
             id:settingsPage
             SettingsPage{
                 anchors.fill: parent
+                onSaveCfg: swipe.currentIndex = 0
             }
         }
 
