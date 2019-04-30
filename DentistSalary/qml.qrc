@@ -4,5 +4,6 @@
         <file>CalendarPage.qml</file>
         <file>DayEditor.qml</file>
         <file>SettingsPage.qml</file>
+        <file>database.db</file>
     </qresource>
 </RCC>

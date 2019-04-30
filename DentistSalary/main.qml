@@ -9,19 +9,87 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
+    Rectangle
+    {
+        id: toolbar
+        height: 50
+        color: "gray"
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 0
+
+        Button
+        {
+            id: btnBack
+            text: "back"
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            width: 60
+            onClicked:
+            {
+                swipe.currentIndex = 0
+            }
+        }
+
+        Text {
+            id: label
+            font.pointSize: 20
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.right: btnSettings.left
+            anchors.rightMargin: 0
+            anchors.left: btnBack.right
+            anchors.leftMargin: 0
+        }
+
+        Button
+        {
+            id: btnSettings
+            text: "settings"
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            width: 60
+            onClicked:
+            {
+                swipe.currentIndex = 1
+            }
+        }
+    }
+
     SwipeView
     {
         id: swipe
-        anchors.bottom: toolbar.top
+        anchors.top: toolbar.bottom
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
         anchors.right: parent.right
+        anchors.rightMargin: 0
         anchors.left: parent.left
-        anchors.top: parent.top
-        currentIndex: 1
+        anchors.leftMargin: 0
+        currentIndex: 0
+        interactive: false
 
         Item {
             id: calendarPage
             CalendarPage
             {
+                anchors.topMargin: 5
                 anchors.fill: parent
                 onDateEditClicked:
                 {
@@ -29,37 +97,28 @@ Window {
                     console.log(date.getFullYear())
                 }
             }
+
+
         }
 
         Item
         {
             id:settingsPage
-
             SettingsPage{
-
+                anchors.fill: parent
             }
         }
-    }
 
-    Rectangle
-    {
-        id: toolbar
-        height: 30
-        color: "gray"
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.left: parent.left
-
-        Button
+        onCurrentIndexChanged:
         {
-            text: "settings"
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            width: 30
-            height: 30
-            onClick:
-            {
-                swipe.currentIndex = 2
+            switch(currentIndex) {
+              case 0:
+                label.text = "Главная"
+                break
+
+              case 1:
+                label.text = "Настройки"
+                break
             }
         }
     }

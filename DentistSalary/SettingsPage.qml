@@ -1,27 +1,16 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.3
 
 Item {
     id: element
-    Text {
-        id: textSettings
-        text: qsTr("Настройки")
-        font.pointSize: 15
-        horizontalAlignment: Text.AlignHCenter
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-    }
 
     Rectangle
     {
         id: rectAdultPercent
         height: 50
         color: "gray"
-        anchors.top: textSettings.bottom
-        anchors.topMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.right: parent.right
@@ -29,7 +18,9 @@ Item {
 
         Text {
             id: textAdultPercent
+            height: 24
             text: qsTr("Процент взрослые:")
+            font.pointSize: 15
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.left: parent.left
@@ -52,10 +43,12 @@ Item {
             anchors.top: textAdultPercent.bottom
             anchors.topMargin: 0
 
-            TextEdit
-            {
-                id:editAdultPercent
+            TextInput {
+                id: inputAdultPercent
+                font.capitalization: Font.AllLowercase
                 anchors.fill: parent
+                font.pixelSize: 20
+                text: DBManager.AdultPercent
             }
         }
 
@@ -77,6 +70,7 @@ Item {
         Text {
             id: textChildPercent
             text: qsTr("Процент дети:")
+            font.pointSize: 15
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.left: parent.left
@@ -99,12 +93,11 @@ Item {
             anchors.top: textChildPercent.bottom
             anchors.topMargin: 0
 
-            TextEdit
-            {
-                id:editChildtPercent
-                anchors.rightMargin: 0
-                anchors.leftMargin: 0
+            TextInput {
+                id: inputChildPercent
+                text: DBManager.ChildPercent
                 anchors.fill: parent
+                font.pixelSize: 20
             }
         }
 
@@ -126,6 +119,7 @@ Item {
         Text {
             id: textXRay
             text: qsTr("Стоимость рентгена:")
+            font.pointSize: 15
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.left: parent.left
@@ -148,10 +142,11 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 5
 
-            TextEdit
-            {
-                id:editXRay
+            TextInput {
+                id: inputXRayCost
+                text: DBManager.XRayCost
                 anchors.fill: parent
+                font.pixelSize: 20
             }
         }
 

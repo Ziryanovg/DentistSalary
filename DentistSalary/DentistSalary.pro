@@ -1,4 +1,4 @@
-QT += quick
+QT += quick sql
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,8 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    xmlmanager.cpp \
-    daysalarymodel.cpp
+    daysalarymodel.cpp \
+    dbmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,5 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    xmlmanager.h \
-    daysalarymodel.h
+    daysalarymodel.h \
+    dbmanager.h
