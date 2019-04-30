@@ -67,7 +67,7 @@ Window {
             width: 60
             onClicked:
             {
-                swipe.currentIndex = 1
+                swipe.currentIndex = 2
             }
         }
     }
@@ -108,6 +108,14 @@ Window {
             SettingsPage{
                 anchors.fill: parent
                 onSaveCfg: swipe.currentIndex = 0
+            }
+        }
+
+        Item {
+            id: dayEditorPage
+            DayEditor
+            {
+                anchors.fill: parent
             }
         }
 
