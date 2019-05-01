@@ -8,6 +8,17 @@ Item {
     property real adultResult:0
     property real childResult:0
     property real result: 0
+    property var dateprop
+
+    function newDate(newdate)
+    {
+        date.text = newdate
+        dateprop = newdate
+        inputAdultSum.text = DBManager.adultSum(newdate)
+        inputChildSum.text = DBManager.childSum(newdate)
+        spinXRayCount.value = DBManager.adultXRayCount(newdate)
+        spinChildXRayCount.value = DBManager.childXRayCount(newdate)
+    }
 
     function calcAdult()
     {
@@ -48,11 +59,25 @@ Item {
         result = childResult + adultResult
     }
 
+    Text {
+        id: date
+        height: 30
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 20
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+    }
+
     Rectangle
     {
         id:rectAdult
-        height: 200
-        anchors.top: parent.top
+        height: 154
+        anchors.top: date.bottom
         anchors.topMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
@@ -143,23 +168,15 @@ Item {
             anchors.topMargin: 10
         }
 
-        Rectangle
-        {
-            height: 30
+        Text {
+            id: textResultOutput
+            font.pointSize: 25
+            text: adultResult
+            anchors.verticalCenter: textResult.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: 5
             anchors.left: textResult.right
             anchors.leftMargin: 5
-            anchors.verticalCenter: textResult.verticalCenter
-            border.color: "black"
-            border.width: 1
-
-            Text {
-                anchors.fill: parent
-                id: textResultOutput
-                font.pointSize: 25
-                text: adultResult
-            }
         }
     }
 
@@ -258,23 +275,15 @@ Item {
             anchors.topMargin: 10
         }
 
-        Rectangle
-        {
-            height: 30
+        Text {
+            id: textChildResultOutput
+            font.pointSize: 25
+            text: childResult
+            anchors.verticalCenter: textChildResult.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: 5
             anchors.left: textChildResult.right
             anchors.leftMargin: 5
-            anchors.verticalCenter: textChildResult.verticalCenter
-            border.color: "black"
-            border.width: 1
-
-            Text {
-                anchors.fill: parent
-                id: textChildResultOutput
-                font.pointSize: 25
-                text: childResult
-            }
         }
     }
 
@@ -299,24 +308,33 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        Rectangle
-        {
-            id:rectFullResultOutput
-            height: 30
+        Text {
+            id: textFullResultOutput
+            text: result
+            anchors.verticalCenter: textFullResult.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: 5
             anchors.left: textFullResult.right
             anchors.leftMargin: 5
-            anchors.verticalCenter: textFullResult.verticalCenter
-            border.width: 1
-            border.color: "black"
+            font.pointSize: 25
+        }
+    }
 
-            Text {
-                id: textFullResultOutput
-                anchors.fill: parent
-                text: result
-                font.pointSize: 25
-            }
+    Button
+    {
+        id: btnSave
+        text: "Сохранить"
+        anchors.top: rectFullResult.bottom
+        anchors.topMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+
+        onClicked:
+        {
+            DBManager.saveDay(dateprop,inputAdultSum.text,inputChildSum.text,spinXRayCount.value,spinChildXRayCount.value);
+            btnSave.text = "Сохранено"
         }
     }
 

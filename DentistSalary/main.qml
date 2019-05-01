@@ -67,7 +67,7 @@ Window {
             width: 60
             onClicked:
             {
-                swipe.currentIndex = 2
+                swipe.currentIndex = 1
             }
         }
     }
@@ -92,6 +92,11 @@ Window {
             {
                 anchors.topMargin: 5
                 anchors.fill: parent
+                onDateEditClicked:
+                {
+                    swipe.currentIndex = 2
+                    dayEditComp.newDate(selectedDate)
+                }
             }
         }
 
@@ -108,6 +113,7 @@ Window {
             id: dayEditorPage
             DayEditor
             {
+                id:dayEditComp
                 anchors.fill: parent
             }
         }

@@ -12,8 +12,8 @@ Item {
         id:calendar
         anchors.topMargin: 0
         anchors.fill: parent
-        frameVisible: true
         selectedDate: new Date()
+
         focus: true
         locale: Qt.locale("ru_RU")
         onPressAndHold:
@@ -33,14 +33,11 @@ Item {
 
 
         style: CalendarStyle {
-            dayDelegate: Rectangle {
-                radius: 40
-
+            dayDelegate: Item {
                 Rectangle {
                     anchors.fill: parent
                     border.color:styleData.date !== undefined &&  styleData.selected ? "blue" : "transparent"
                     color: DBManager.isDayDataExist(styleData.date) ? "green" : "white"
-                    radius: 40
                 }
 
 

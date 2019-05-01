@@ -5,6 +5,15 @@
 #include <QSqlDatabase>
 #include <QDate>
 
+enum db_names {
+    index = 0,
+    date = 1,
+    adult_sum = 2,
+    adult_xray = 3,
+    child_sum = 4,
+    child_xray = 5
+};
+
 class DBManager : public QObject
 {
     Q_OBJECT
@@ -18,6 +27,11 @@ public:
     QString XRayCost() const;
 
     Q_INVOKABLE bool isDayDataExist(QDate date);
+    Q_INVOKABLE qreal adultSum(QDate date);
+    Q_INVOKABLE qreal childSum(QDate date);
+    Q_INVOKABLE quint8 adultXRayCount(QDate date);
+    Q_INVOKABLE quint8 childXRayCount(QDate date);
+    Q_INVOKABLE void saveDay(QDate date,qreal adultSumm,qreal childSumm,int adultXRay, int childXRay);
 
 signals:
 
