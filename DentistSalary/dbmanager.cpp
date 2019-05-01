@@ -13,7 +13,7 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
     databasePath.append("/database.db");
     QFile f(databasePath);
 
-    if(!f.exists())
+    if(f.exists())
     {
         QFile file(":/database.db") ;
         if (file.exists()) {
@@ -41,6 +41,33 @@ QString DBManager::ChildPercent() const
 QString DBManager::XRayCost() const
 {
     return m_XRayCost;
+}
+
+bool DBManager::isDayDataExist(QDate date)
+{
+    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
+
+    if(!db.open())
+    {
+        qDebug() << "db is not opened";
+        return false;
+    }
+
+    QSqlQuery query;
+
+    query.exec("SELECT * FROM data WHERE Date = '"+fulldate+"'");
+
+    db.close();
+
+    bool result = false;
+
+    while(query.next())
+    {
+        if(query.value(0).toInt() != 0)
+            result = true;
+    }
+
+    return result;
 }
 
 void DBManager::setAdultPercent(QString AdultPercent)

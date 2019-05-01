@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSqlDatabase>
+#include <QDate>
 
 class DBManager : public QObject
 {
@@ -15,6 +16,8 @@ public:
     QString AdultPercent() const;
     QString ChildPercent() const;
     QString XRayCost() const;
+
+    Q_INVOKABLE bool isDayDataExist(QDate date);
 
 signals:
 

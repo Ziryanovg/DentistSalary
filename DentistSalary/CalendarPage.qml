@@ -13,7 +13,6 @@ Item {
         anchors.topMargin: 0
         anchors.fill: parent
         frameVisible: true
-        weekNumbersVisible: true
         selectedDate: new Date()
         focus: true
         locale: Qt.locale("ru_RU")
@@ -24,54 +23,45 @@ Item {
 
         Menu {
             id: contextMenu
-            MenuItem { text: "Редактировать"; onTriggered: dateEditClicked(calendar.selectedDate)}
+            MenuItem {
+                text: "Редактировать"
+                onTriggered:{
+                    dateEditClicked(calendar.selectedDate)
+                }
+            }
         }
 
 
-        //        style: CalendarStyle {
-        //            dayDelegate: Item {
-        //                readonly property color sameMonthDateTextColor: "#444"
-        //                readonly property color selectedDateColor: Qt.platform.os === "osx" ? "#3778d0" : systemPalette.highlight
-        //                readonly property color selectedDateTextColor: "white"
-        //                readonly property color differentMonthDateTextColor: "#bbb"
-        //                readonly property color invalidDatecolor: "#dddddd"
+        style: CalendarStyle {
+            dayDelegate: Rectangle {
+                radius: 40
+
+                Rectangle {
+                    anchors.fill: parent
+                    border.color:styleData.date !== undefined &&  styleData.selected ? "blue" : "transparent"
+                    color: DBManager.isDayDataExist(styleData.date) ? "green" : "white"
+                    radius: 40
+                }
 
 
-        //                Rectangle {
-        //                    anchors.fill: parent
-        //                    border.color: "transparent"
-        //                    color: styleData.date !== undefined && styleData.selected ? selectedDateColor : "transparent"
-        //                    anchors.margins: styleData.selected ? -1 : 0
-        //                }
-
-        //                Image {
-        //                    visible: eventModel.eventsForDate(styleData.date).length > 0
-        //                    anchors.top: parent.top
-        //                    anchors.left: parent.left
-        //                    anchors.margins: -1
-        //                    width: 12
-        //                    height: width
-        //                    source: "qrc:/images/eventindicator.png"
-        //                }
-
-        //                Label {
-        //                    id: dayDelegateText
-        //                    text: styleData.date.getDate()
-        //                    anchors.centerIn: parent
-        //                    color: {
-        //                        var color = invalidDatecolor;
-        //                        if (styleData.valid) {
-        //                            // Date is within the valid range.
-        //                            color = styleData.visibleMonth ? sameMonthDateTextColor : differentMonthDateTextColor;
-        //                            if (styleData.selected) {
-        //                                color = selectedDateTextColor;
-        //                            }
-        //                        }
-        //                        color;
-        //                    }
-        //                }
-        //            }
-        //        }
+                Label {
+                    id: dayDelegateText
+                    text: styleData.date.getDate()
+                    anchors.centerIn: parent
+                    color: {
+                        var color = "gray";
+                        if (styleData.valid) {
+                            // Date is within the valid range.
+                            color = styleData.visibleMonth ? "black" : "gray";
+                            if (styleData.selected) {
+                                color = "black";
+                            }
+                        }
+                        color;
+                    }
+                }
+            }
+        }
     }
 
 }

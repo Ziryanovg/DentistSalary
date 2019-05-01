@@ -92,14 +92,7 @@ Window {
             {
                 anchors.topMargin: 5
                 anchors.fill: parent
-                onDateEditClicked:
-                {
-                    var date = new Date(selectedDate)
-                    console.log(date.getFullYear())
-                }
             }
-
-
         }
 
         Item
