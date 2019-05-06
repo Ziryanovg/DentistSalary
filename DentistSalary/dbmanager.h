@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QDate>
 
+
 enum db_names {
     index = 0,
     date = 1,
@@ -12,6 +13,15 @@ enum db_names {
     adult_xray = 3,
     child_sum = 4,
     child_xray = 5
+};
+
+struct dateinfo
+{
+    QString date;
+    qreal adultsumm;
+    qreal childsumm;
+    quint8 adultxray;
+    quint8 childxray;
 };
 
 class DBManager : public QObject
@@ -32,7 +42,9 @@ public:
     Q_INVOKABLE quint8 adultXRayCount(QDate date);
     Q_INVOKABLE quint8 childXRayCount(QDate date);
     Q_INVOKABLE void saveDay(QDate date,qreal adultSumm,qreal childSumm,int adultXRay, int childXRay);
+    Q_INVOKABLE void clearDay(QDate date);
 
+    Q_INVOKABLE QList<dateinfo> getModelData(QDate date);
 signals:
 
     void AdultPercentChanged(QString AdultPercent);

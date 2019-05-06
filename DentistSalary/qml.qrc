@@ -5,5 +5,15 @@
         <file>DayEditor.qml</file>
         <file>SettingsPage.qml</file>
         <file>database.db</file>
+        <file>Tools.qml</file>
+        <file>MonthPage.qml</file>
+        <file>MonthModelDelegate.qml</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>img/back_2.png</file>
+        <file>img/edit.png</file>
+        <file>img/settings_2.png</file>
+        <file>img/clear.png</file>
+        <file>img/month.png</file>
     </qresource>
 </RCC>

@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "dbmanager.h"
+#include "daysalarymodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,8 +13,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     DBManager mgn;
+    DaySalaryModel model;
 
     engine.rootContext()->setContextProperty("DBManager",&mgn);
+    engine.rootContext()->setContextProperty("DBModel",&model);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

@@ -7,12 +7,19 @@ Item {
 
     property real adultResult:0
     property real childResult:0
-    property real result: 0
+    property real result: 800
     property var dateprop
+    property bool available: true
+
+    function clearSaveBtn()
+    {
+        if(btnSave.text != "Сохранить")
+            btnSave.text = "Сохранить"
+    }
 
     function newDate(newdate)
     {
-        date.text = newdate
+        date.text = newdate.getDate()+"."+newdate.getMonth()+"."+newdate.getFullYear()
         dateprop = newdate
         inputAdultSum.text = DBManager.adultSum(newdate)
         inputChildSum.text = DBManager.childSum(newdate)
@@ -27,7 +34,8 @@ Item {
         if(isNaN(sum))
         {
             rectInputAdultSum.border.color = "red"
-            return "Данные введены неверно"
+            available = false
+            return
         }
 
         rectInputAdultSum.border.color = "black"
@@ -44,7 +52,8 @@ Item {
         if(isNaN(sum))
         {
             rectInputChildSum.border.color = "red"
-            return "Данные введены неверно"
+            available = false
+            return
         }
 
         rectInputChildSum.border.color = "black"
@@ -56,7 +65,11 @@ Item {
 
     function calcResult()
     {
+        clearSaveBtn()
+
         result = childResult + adultResult
+        if (result < 800) result =800
+        available = true
     }
 
     Text {
@@ -333,8 +346,15 @@ Item {
 
         onClicked:
         {
-            DBManager.saveDay(dateprop,inputAdultSum.text,inputChildSum.text,spinXRayCount.value,spinChildXRayCount.value);
-            btnSave.text = "Сохранено"
+            if(available)
+            {
+                DBManager.saveDay(dateprop,inputAdultSum.text,inputChildSum.text,spinXRayCount.value,spinChildXRayCount.value);
+                btnSave.text = "Сохранено"
+            }
+            else
+            {
+                btnSave.text = "Исправьте данные!"
+            }
         }
     }
 

@@ -21,7 +21,7 @@ QVariant DaySalaryModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-    case CommandRole:
+    case AdultSumm:
         return m_data.at(index.row());
     default:
         return QVariant();
@@ -31,17 +31,7 @@ QVariant DaySalaryModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> DaySalaryModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-    roles[CommandRole] = "command";
+    roles[AdultSumm] = "AdultSumm";
 
     return roles;
-}
-
-void DaySalaryModel::add(QString command)
-{
-    beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
-    m_data.append(command);
-    endInsertRows();
-
-    QModelIndex index = createIndex(0, 0, static_cast<void *>(0));
-    emit dataChanged(index, index);
 }

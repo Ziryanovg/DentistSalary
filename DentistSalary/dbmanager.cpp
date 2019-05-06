@@ -30,6 +30,11 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
     LoadCfg();
 }
 
+QString QDateToQString(QDate& date)
+{
+    return QString::number(date.day()) +"-"+ QString::number(date.month()) +"-"+QString::number(date.year());
+}
+
 QString DBManager::AdultPercent() const
 {
     return m_AdultPercent;
@@ -47,8 +52,6 @@ QString DBManager::XRayCost() const
 
 bool DBManager::isDayDataExist(QDate date)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     if(!db.open())
     {
         qDebug() << "db is not opened";
@@ -57,7 +60,7 @@ bool DBManager::isDayDataExist(QDate date)
 
     QSqlQuery query;
 
-    query.exec("SELECT * FROM data WHERE Date = '"+fulldate+"'");
+    query.exec("SELECT * FROM data WHERE Date = '"+QDateToQString(date)+"'");
 
     db.close();
 
@@ -74,8 +77,6 @@ bool DBManager::isDayDataExist(QDate date)
 
 qreal DBManager::adultSum(QDate date)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     if(!db.open())
     {
         qDebug() << "db is not opened";
@@ -84,7 +85,7 @@ qreal DBManager::adultSum(QDate date)
 
     QSqlQuery query;
 
-    query.exec("SELECT AdultSumm FROM data WHERE Date = '"+fulldate+"'");
+    query.exec("SELECT AdultSumm FROM data WHERE Date = '"+QDateToQString(date)+"'");
 
     db.close();
 
@@ -100,8 +101,6 @@ qreal DBManager::adultSum(QDate date)
 
 qreal DBManager::childSum(QDate date)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     if(!db.open())
     {
         qDebug() << "db is not opened";
@@ -110,7 +109,7 @@ qreal DBManager::childSum(QDate date)
 
     QSqlQuery query;
 
-    query.exec("SELECT ChildSumm FROM data WHERE Date = '"+fulldate+"'");
+    query.exec("SELECT ChildSumm FROM data WHERE Date = '"+QDateToQString(date)+"'");
 
     db.close();
 
@@ -126,8 +125,6 @@ qreal DBManager::childSum(QDate date)
 
 quint8 DBManager::adultXRayCount(QDate date)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     if(!db.open())
     {
         qDebug() << "db is not opened";
@@ -136,7 +133,7 @@ quint8 DBManager::adultXRayCount(QDate date)
 
     QSqlQuery query;
 
-    query.exec("SELECT AdultXRay FROM data WHERE Date = '"+fulldate+"'");
+    query.exec("SELECT AdultXRay FROM data WHERE Date = '"+QDateToQString(date)+"'");
 
     db.close();
 
@@ -152,8 +149,6 @@ quint8 DBManager::adultXRayCount(QDate date)
 
 quint8 DBManager::childXRayCount(QDate date)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     if(!db.open())
     {
         qDebug() << "db is not opened";
@@ -162,7 +157,7 @@ quint8 DBManager::childXRayCount(QDate date)
 
     QSqlQuery query;
 
-    query.exec("SELECT ChildXRay FROM data WHERE Date = '"+fulldate+"'");
+    query.exec("SELECT ChildXRay FROM data WHERE Date = '"+QDateToQString(date)+"'");
 
     db.close();
 
@@ -178,17 +173,49 @@ quint8 DBManager::childXRayCount(QDate date)
 
 void DBManager::saveDay(QDate date,qreal adultSumm, qreal childSumm, int adultXRay, int childXRay)
 {
-    QString fulldate = QString::number(date.day()) +"."+ QString::number(date.month()) +"."+QString::number(date.year());
-
     db.open();
 
     QSqlQuery query;
 
-    QString q = "INSERT INTO data (Date,AdultSumm,AdultXRay,ChildSumm,ChildXRay) VALUES ('"+fulldate+"',"+QString::number(adultSumm)+","+QString::number(adultXRay)+","+QString::number(childSumm)+","+QString::number(childXRay)+")";
+    QString q = "INSERT INTO data (Date,AdultSumm,AdultXRay,ChildSumm,ChildXRay) VALUES ('"+QDateToQString(date)+"',"+QString::number(adultSumm)+","+QString::number(adultXRay)+","+QString::number(childSumm)+","+QString::number(childXRay)+")";
 
     query.exec(q);
 
     db.close();
+}
+
+void DBManager::clearDay(QDate date)
+{
+    db.open();
+
+    QSqlQuery query;
+
+    QString q = "DELETE FROM data WHERE Date ='"+QDateToQString(date)+"'";
+
+    query.exec(q);
+
+    db.close();
+}
+
+QList<dateinfo> DBManager::getModelData(QDate date)
+{
+    if(!db.open())
+    {
+        qDebug() << "db is not opened";
+        return QList<dateinfo>();
+    }
+
+    QSqlQuery query;
+
+    QString querydate = date.month()+"-"+date.year();
+
+    qDebug() << querydate;
+
+//    query.exec("SELECT * FROM data WHERE Date = '"+QDateToQString(date)+"'");
+
+//    db.close();
+
+//    QList<dateinfo> list;
 }
 
 void DBManager::setAdultPercent(QString AdultPercent)

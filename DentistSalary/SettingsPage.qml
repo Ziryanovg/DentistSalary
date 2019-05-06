@@ -6,6 +6,13 @@ Item {
 
     signal saveCfg()
 
+    Component.onCompleted:
+    {
+        inputAdultPercent.text = DBManager.AdultPercent
+        inputChildPercent.text = DBManager.ChildPercent
+        inputXRayCost.text = DBManager.XRayCost
+    }
+
     Rectangle
     {
         id: rectAdultPercent
@@ -53,7 +60,6 @@ Item {
                 font.capitalization: Font.AllLowercase
                 anchors.fill: parent
                 font.pixelSize: 27
-                text: DBManager.AdultPercent
                 anchors.leftMargin: 2
             }
         }
@@ -105,7 +111,6 @@ Item {
             TextInput {
                 id: inputChildPercent
                 height: 35
-                text: DBManager.ChildPercent
                 anchors.leftMargin: 2
                 anchors.fill: parent
                 font.pixelSize: 27
@@ -147,7 +152,7 @@ Item {
             border.width: 1
 
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
+            anchors.bottomMargin: 5
             anchors.top: textXRay.bottom
             anchors.topMargin: 0
             anchors.right: parent.right
@@ -158,7 +163,6 @@ Item {
             TextInput {
                 id: inputXRayCost
                 height: 35
-                text: DBManager.XRayCost
                 anchors.leftMargin: 2
                 anchors.fill: parent
                 font.pixelSize: 27
@@ -169,8 +173,8 @@ Item {
     Button
     {
         text: "Сохранить"
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.top: rectXRayPrice.bottom
+        anchors.topMargin: 20
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.right: parent.right
@@ -179,7 +183,7 @@ Item {
         {
             var available = true
 
-            if(isNaN(Number(inputAdultPercent.text)))
+            if(isNaN(Number(inputAdultPercent.text)) || inputAdultPercent.text == "")
             {
                 rectInputAdultPercent.border.color = "red"
                 available = false
@@ -190,7 +194,7 @@ Item {
                 DBManager.setAdultPercent(inputAdultPercent.text)
             }
 
-            if(isNaN(Number(inputChildPercent.text)))
+            if(isNaN(Number(inputChildPercent.text)) || inputChildPercent.text == "")
             {
                rectInputChildPercent.border.color = "red"
                available = false
@@ -201,7 +205,7 @@ Item {
                 DBManager.setChildPercent(inputChildPercent.text)
             }
 
-            if(isNaN(Number(inputXRayCost.text)))
+            if(isNaN(Number(inputXRayCost.text)) || inputXRayCost.text == "")
             {
                 rectInputXRayCost.border.color = "red"
                 available = false
@@ -221,16 +225,3 @@ Item {
         }
     }
 }
-
-
-
-
-
-
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:4;anchors_height:20;anchors_width:80;anchors_x:179;anchors_y:252}
-D{i:3;anchors_height:30}D{i:8;anchors_height:20;anchors_width:80;anchors_x:143;anchors_y:149}
-D{i:12;anchors_height:20;anchors_width:80;anchors_x:377;anchors_y:214}
-}
- ##^##*/
