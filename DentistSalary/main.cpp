@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     DBManager mgn;
-    DaySalaryModel model;
+    DaySalaryModel model(nullptr,&mgn);
 
     engine.rootContext()->setContextProperty("DBManager",&mgn);
     engine.rootContext()->setContextProperty("DBModel",&model);

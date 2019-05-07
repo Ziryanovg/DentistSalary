@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QAbstractListModel>
+#include "dbmanager.h"
 
 class DaySalaryModel : public QAbstractListModel
 {
@@ -12,11 +13,12 @@ public:
             AdultSumm = Qt::UserRole + 1
         };
 
-    explicit DaySalaryModel(QObject *parent = nullptr);
+    explicit DaySalaryModel(QObject *parent = nullptr,DBManager* mgn=nullptr);
 
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
+    //void setData(QList<>)
 
 signals:
 
@@ -24,6 +26,8 @@ public slots:
 
 private:
     QStringList m_data;
+    DBManager* m_dbmanager;
+
 };
 
 #endif // DAYSALARYMODEL_H

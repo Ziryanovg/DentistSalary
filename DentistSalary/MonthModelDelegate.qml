@@ -7,8 +7,8 @@ Rectangle
     color: "red"
 
     Text {
-        id: adultSum
-        text: qsTr("text")
+        id: adultsumm
+        text: AdultSumm
         anchors.fill: parent
     }
 }

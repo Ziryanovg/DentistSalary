@@ -7,6 +7,6 @@ ListView
 
     model: DBModel
 
-    delegate: MonthModelDelegate
+    delegate: MonthModelDelegate{}
 
 }

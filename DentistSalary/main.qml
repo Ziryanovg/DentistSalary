@@ -31,7 +31,11 @@ Window {
             loader.source = ""
             loader.source = "qrc:/CalendarPage.qml"
         }
-        onBtnMonthClicked: DBManager.getModelData()
+
+        onBtnMonthClicked:
+        {
+            loader.source = "qrc:/MonthPage.qml"
+        }
     }
 
     Loader

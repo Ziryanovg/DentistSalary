@@ -32,7 +32,17 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
 
 QString QDateToQString(QDate& date)
 {
-    return QString::number(date.day()) +"-"+ QString::number(date.month()) +"-"+QString::number(date.year());
+    QString month = QString::number(date.month());
+    if(month.size()==1)
+        month = '0'+month;
+
+    QString day = QString::number(date.day());
+    if(day.size()==1)
+        day = '0'+day;
+
+    QString s = QString::number(date.year())+"-"+ month +"-"+ day;
+    qDebug() << s;
+    return s;
 }
 
 QString DBManager::AdultPercent() const
@@ -207,13 +217,12 @@ QList<dateinfo> DBManager::getModelData(QDate date)
 
     QSqlQuery query;
 
-    QString querydate = date.month()+"-"+date.year();
+    QString lowdate = "1-" + QString::number(date.month()) +"-"+QString::number(date.year());
+    QString highdate = "31-" + QString::number(date.month()) +"-"+QString::number(date.year());
 
-    qDebug() << querydate;
+    query.exec("SELECT * FROM data WHERE Date > '"+lowdate );
 
-//    query.exec("SELECT * FROM data WHERE Date = '"+QDateToQString(date)+"'");
-
-//    db.close();
+    db.close();
 
 //    QList<dateinfo> list;
 }

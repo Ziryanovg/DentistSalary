@@ -1,6 +1,7 @@
 #include "daysalarymodel.h"
+#include <QDebug>
 
-DaySalaryModel::DaySalaryModel(QObject *parent) : QAbstractListModel(parent)
+DaySalaryModel::DaySalaryModel(QObject *parent, DBManager* mgn) : QAbstractListModel(parent),m_dbmanager(mgn)
 {
 
 }
@@ -31,7 +32,7 @@ QVariant DaySalaryModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> DaySalaryModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-    roles[AdultSumm] = "AdultSumm";
+    roles[AdultSumm] = "adultsumm";
 
     return roles;
 }

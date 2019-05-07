@@ -44,7 +44,7 @@ public:
     Q_INVOKABLE void saveDay(QDate date,qreal adultSumm,qreal childSumm,int adultXRay, int childXRay);
     Q_INVOKABLE void clearDay(QDate date);
 
-    Q_INVOKABLE QList<dateinfo> getModelData(QDate date);
+    QList<dateinfo> getModelData(QDate date);
 signals:
 
     void AdultPercentChanged(QString AdultPercent);
