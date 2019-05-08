@@ -2,11 +2,22 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 
+
 Window {
     id: window
     visible: true
     width: 640
     height: 480
+
+    DeleteDayDialog{
+        id:deleteDialog
+        onYes:
+        {
+            DBManager.clearDay(loader.item.selectedDate)
+            loader.source = ""
+            loader.source = "qrc:/CalendarPage.qml"
+        }
+    }
 
     Tools
     {
@@ -27,14 +38,16 @@ Window {
         }
         onBtnDayClearClicked:
         {
-            DBManager.clearDay(loader.item.selectedDate)
-            loader.source = ""
-            loader.source = "qrc:/CalendarPage.qml"
+            deleteDialog.open()
         }
 
         onBtnMonthClicked:
         {
+            var month = loader.item.visibleMonth+1;
+            var year = loader.item.visibleYear;
+            DBModel.fillDataFromDBMgn(year,month)
             loader.source = "qrc:/MonthPage.qml"
+            loader.item.setMonthYear(year,month)
         }
     }
 
@@ -51,4 +64,6 @@ Window {
         anchors.leftMargin: 0
         source:"qrc:/CalendarPage.qml"
     }
+
+
 }

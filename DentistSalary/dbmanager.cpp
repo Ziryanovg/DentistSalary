@@ -40,9 +40,7 @@ QString QDateToQString(QDate& date)
     if(day.size()==1)
         day = '0'+day;
 
-    QString s = QString::number(date.year())+"-"+ month +"-"+ day;
-    qDebug() << s;
-    return s;
+    return QString::number(date.year())+"-"+ month +"-"+ day;
 }
 
 QString DBManager::AdultPercent() const
@@ -207,7 +205,7 @@ void DBManager::clearDay(QDate date)
     db.close();
 }
 
-QList<dateinfo> DBManager::getModelData(QDate date)
+QList<dateinfo> DBManager::getModelData(int year, int month)
 {
     if(!db.open())
     {
@@ -215,17 +213,43 @@ QList<dateinfo> DBManager::getModelData(QDate date)
         return QList<dateinfo>();
     }
 
+    QDate low(year,month,1);
+    QDate high(year,month,1);
+    high.setDate(year,month,high.daysInMonth());
+
+    QString lowdate = QDateToQString(low);
+    QString highdate = QDateToQString(high);
+
     QSqlQuery query;
 
-    QString lowdate = "1-" + QString::number(date.month()) +"-"+QString::number(date.year());
-    QString highdate = "31-" + QString::number(date.month()) +"-"+QString::number(date.year());
+    query.exec("SELECT * FROM data WHERE Date BETWEEN date('"+lowdate+"') AND date('"+highdate+"')");
 
-    query.exec("SELECT * FROM data WHERE Date > '"+lowdate );
+    QList<dateinfo> data;
+
+    while(query.next())
+    {
+        dateinfo temp;
+        temp.date = query.value(1).toString();
+        temp.adultsumm = query.value(2).toString();
+        temp.adultxray = query.value(3).toString();
+        temp.childsumm = query.value(4).toString();
+        temp.childxray = query.value(5).toString();
+        data.append(temp);
+    }
+
+    for (auto i=0;i<data.size();++i) {
+        qDebug() << data[i].date;
+        qDebug() << data[i].adultsumm;
+        qDebug() << data[i].adultxray;
+        qDebug() << data[i].childsumm;
+        qDebug() << data[i].childxray;
+    }
 
     db.close();
 
-//    QList<dateinfo> list;
+    return data;
 }
+
 
 void DBManager::setAdultPercent(QString AdultPercent)
 {

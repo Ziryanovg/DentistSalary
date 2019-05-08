@@ -5,12 +5,15 @@
 #include <QAbstractListModel>
 #include "dbmanager.h"
 
+struct dateinfo;
+
 class DaySalaryModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
     enum Roles {
-            AdultSumm = Qt::UserRole + 1
+            Date = Qt::UserRole + 1,
+            AdultSumm, AdultXRayCount, ChildSumm, ChildXRayCount,Result
         };
 
     explicit DaySalaryModel(QObject *parent = nullptr,DBManager* mgn=nullptr);
@@ -18,15 +21,16 @@ public:
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual QHash<int, QByteArray> roleNames() const;
-    //void setData(QList<>)
-
+    Q_INVOKABLE void fillDataFromDBMgn(int year, int month);
+    Q_INVOKABLE qreal getDataMonthResult();
 signals:
 
 public slots:
 
 private:
-    QStringList m_data;
+    QList<dateinfo> m_data;
     DBManager* m_dbmanager;
+    qreal m_dataResult;
 
 };
 

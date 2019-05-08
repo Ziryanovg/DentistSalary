@@ -18,10 +18,11 @@ enum db_names {
 struct dateinfo
 {
     QString date;
-    qreal adultsumm;
-    qreal childsumm;
-    quint8 adultxray;
-    quint8 childxray;
+    QString adultsumm;
+    QString childsumm;
+    QString adultxray;
+    QString childxray;
+    qreal result=0.0;
 };
 
 class DBManager : public QObject
@@ -44,7 +45,7 @@ public:
     Q_INVOKABLE void saveDay(QDate date,qreal adultSumm,qreal childSumm,int adultXRay, int childXRay);
     Q_INVOKABLE void clearDay(QDate date);
 
-    QList<dateinfo> getModelData(QDate date);
+    QList<dateinfo> getModelData(int year, int month);
 signals:
 
     void AdultPercentChanged(QString AdultPercent);
