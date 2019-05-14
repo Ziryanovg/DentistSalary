@@ -280,7 +280,7 @@ Item {
         Text {
             id: textChildResult
             height: 30
-            text: qsTr("Итого за взрослых:")
+            text: qsTr("Итого за детей:")
             font.pointSize: 18
             anchors.left: parent.left
             anchors.leftMargin: 5

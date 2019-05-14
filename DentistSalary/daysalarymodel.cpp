@@ -52,7 +52,7 @@ QVariant DaySalaryModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> DaySalaryModel::roleNames() const
 {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-    roles[Date] = "date";
+    roles[Date] = "modelDate";
     roles[AdultSumm] = "adultsumm";
     roles[AdultXRayCount] = "adultxraycount";
     roles[ChildSumm] = "childsumm";
@@ -81,8 +81,13 @@ void DaySalaryModel::fillDataFromDBMgn(int year, int month)
 
        qreal adultresult = (adultsumm - adultxray*xraycost)*adultpercent/100;
        qreal childresult = (childsumm - childxray*xraycost)*childpercent/100;
-       m_data[i].result = adultresult+childresult;
-       m_dataResult += adultresult+childresult;
+
+       qreal dayresult = adultresult+childresult;
+
+       if(dayresult<800)dayresult = 800;
+
+       m_data[i].result = dayresult;
+       m_dataResult += dayresult;
    }
 
 

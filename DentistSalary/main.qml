@@ -21,6 +21,7 @@ Window {
 
     Tools
     {
+        z:1
         id:toolBar
         anchors.top: parent.top
         anchors.topMargin: 0

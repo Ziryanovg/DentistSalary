@@ -22,18 +22,27 @@ Rectangle
                 target: btnDayEdit
                 visible:true
             }
+            PropertyChanges {
+                target: btnDayClear
+                visible:true
+            }
+            PropertyChanges {
+                target: btnMonth
+                visible:true
+            }
         },
         State {
-            name: "dayEdit"
+            name: "other"
             PropertyChanges {
                 target: btnDayEdit
                 visible:false
             }
-        },
-        State {
-            name: "settings"
             PropertyChanges {
-                target: btnDayEdit
+                target: btnDayClear
+                visible:false
+            }
+            PropertyChanges {
+                target: btnMonth
                 visible:false
             }
         }
@@ -79,7 +88,7 @@ Rectangle
                 onClicked:
                 {
                     btnDayEditClicked()
-                    toolbar.state = "dayEdit"
+                    toolbar.state = "other"
                 }
             }
         }
@@ -116,6 +125,7 @@ Rectangle
                 onClicked:
                 {
                     btnMonthClicked()
+                    toolbar.state = "other"
                 }
             }
         }
@@ -138,7 +148,7 @@ Rectangle
             onClicked:
             {
                 btnSettingsClicked()
-                toolbar.state = "settings"
+                toolbar.state = "other"
             }
         }
     }

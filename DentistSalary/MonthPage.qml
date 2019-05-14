@@ -43,6 +43,7 @@ Item
     id: element
     Rectangle
     {
+        z:2
         id:rectResult
         color: "beige"
         anchors.top: parent.top
@@ -56,7 +57,7 @@ Item
         Text {
             id: textResult
             text: "Сумма за "+ month +" "+ year + " года: "+parseFloat(DBModel.getDataMonthResult()).toFixed(2);
-            font.pointSize: 30
+            font.pointSize: 20
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: parent.top
@@ -67,24 +68,61 @@ Item
         }
     }
 
-    ListView
+    Flickable
     {
-        id:list
-        anchors.top: rectResult.bottom
-        anchors.topMargin: 0
+        id:flick
+        flickableDirection: Flickable.HorizontalFlick
+        z:1
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.top: rectResult.bottom
+        anchors.topMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
-        interactive: false
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        interactive: true
 
-        model: DBModel
+        contentWidth: 727; contentHeight: 300
 
-        header: MonthListViewHeader{}
+        MonthListViewHeader
+        {
+            id:header
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            z:2
+        }
 
-        delegate: MonthModelDelegate{}
+        ListView
+        {
+            id:list
+            anchors.top: header.bottom
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            interactive: true
 
+            model: DBModel
+
+            delegate: MonthModelDelegate{}
+
+        }
     }
 }
+
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

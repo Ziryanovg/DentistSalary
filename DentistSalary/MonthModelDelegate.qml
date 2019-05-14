@@ -3,83 +3,165 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import Qt.labs.calendar 1.0
 
-Rectangle
+ColumnLayout
 {
-    height: 25
-    width: parent.width
-    border.width: 1
-    border.color: "black"
+    id: rectangle
+    height: 30
+    spacing: 0
 
     Row
     {
         id: row
-        spacing: 1
         anchors.fill: parent
+        spacing: 10
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
+        }
+
 
         Text
         {
             id: textDate
-            text: date
+            width: 100
+            text: modelDate
+            anchors.verticalCenter: parent.verticalCenter
             wrapMode: Text.WordWrap
-            width: parent.width*0.2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
+        }
+
+        Text
+        {
+            id: textResult
+            text: result
+            anchors.verticalCenter: parent.verticalCenter
+            width: 100
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textAdultSumm
             text: adultsumm
-            width: parent.width*0.2
+            anchors.verticalCenter: parent.verticalCenter
+            width: 100
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
             wrapMode: Text.WordWrap
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textAdultXRay
             text: adultxraycount
-            width: parent.width*0.1
+            anchors.verticalCenter: parent.verticalCenter
+            width: 100
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
             wrapMode: Text.WordWrap
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textChildSumm
             text: childsumm
-            width: parent.width*0.2
+            anchors.verticalCenter: parent.verticalCenter
+            width: 100
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
             wrapMode: Text.WordWrap
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textChildXRay
             text: childxraycount
-            width: parent.width*0.1
+            anchors.verticalCenter: parent.verticalCenter
+            width: 100
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
             wrapMode: Text.WordWrap
         }
 
-
-        Text
+        Rectangle
         {
-            id: textResult
-            text: result
-            width: parent.width*0.2
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            Layout.fillWidth: true
-            wrapMode: Text.WordWrap
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
+
     }
+
+    Rectangle
+    {
+        height: 1
+        color: "black"
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+    }
+
 }

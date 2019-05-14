@@ -5,73 +5,153 @@ import QtQuick.Layouts 1.3
 Rectangle {
     id: rectangle
     height: 50
+
     border.width: 1
     border.color: "black"
-    width: parent.width
 
     Row
     {
         id: row
-        spacing: 1
         anchors.fill: parent
+        spacing: 10
 
-        Text
+        Rectangle
         {
-            id: textDate
-            width: parent.width*0.2
-            text: qsTr("Дата")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
+            id: textDate
+            width: 100
+            text: qsTr("Дата")
+            anchors.verticalCenter: parent.verticalCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
+        }
+
+        Text
+        {
+            id: textResult
+            width: 100
+            text: qsTr("Итого")
+            anchors.verticalCenter: parent.verticalCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
+        }
+
+
+        Text
+        {
             id: textAdultSumm
-            width: parent.width*0.2
+            width: 100
             text: qsTr("Cумма взрослые")
+            anchors.verticalCenter: parent.verticalCenter
             wrapMode: Text.WordWrap
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
+        }
+
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textAdultXRay
-            width: parent.width*0.1
+            width: 100
             text: qsTr("Рентген взрослые")
+            anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.WordWrap
+        }
+
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textChildSumm
-            width: parent.width*0.2
+            width: 100
             text: qsTr("Сумма дети")
+            anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.WordWrap
+        }
+
+
+
+        Rectangle
+        {
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
 
         Text
         {
             id: textChildXRay
-            width: parent.width*0.1
+            width: 100
             text: qsTr("Рентген дети")
+            anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             wrapMode: Text.WordWrap
         }
 
-
-        Text
+        Rectangle
         {
-            id: textResult
-            width: parent.width*0.2
-            text: qsTr("Итого")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            width: 1
+            color: "black"
         }
     }
 }
