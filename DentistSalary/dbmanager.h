@@ -29,7 +29,11 @@ class DBManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit DBManager(QObject *parent = nullptr);
+    static DBManager& getInstance(){
+        static DBManager instance;
+        return instance;
+    }
+
     Q_PROPERTY(QString AdultPercent READ AdultPercent WRITE setAdultPercent NOTIFY AdultPercentChanged)
     Q_PROPERTY(QString ChildPercent READ ChildPercent WRITE setChildPercent NOTIFY ChildPercentChanged)
     Q_PROPERTY(QString XRayCost READ XRayCost WRITE setXRayCost NOTIFY XRayCostChanged)
@@ -65,6 +69,9 @@ public slots:
     void saveCfg();
 
 private:
+    explicit DBManager(QObject *parent = nullptr);
+    DBManager(const DBManager&);
+    DBManager& operator=(DBManager&);
     QSqlDatabase db;
     QString m_AdultPercent;
     QString m_ChildPercent;
